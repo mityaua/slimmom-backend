@@ -26,9 +26,17 @@ class NotAuthorizedError extends commonError {
   }
 }
 
+class NotFoundError extends commonError {
+  constructor(message) {
+    super(message);
+    this.status = 404;
+  }
+}
+
 module.exports = {
   commonError,
   ValidationError,
   WrongParametersError,
   NotAuthorizedError,
+  NotFoundError,
 };
