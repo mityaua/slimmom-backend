@@ -14,7 +14,7 @@ const productSchema = new Schema({
   },
   weight: {
     type: Number,
-    default: 0,
+    default: null,
   },
   owner: {
     type: SchemaTypes.ObjectId,
