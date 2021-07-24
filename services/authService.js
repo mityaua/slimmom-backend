@@ -1,17 +1,17 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-const { User } = require("../models/userModel");
-const { NotAuthorizedError } = require("../helpers/errors");
+const { User } = require('../models/userModel');
+const { NotAuthorizedError } = require('../helpers/errors');
 
 const loginService = async (login, password) => {
   const user = await User.findOne({ login });
 
   if (!user) {
-    throw new NotAuthorizedError("Login or password is wrong");
+    throw new NotAuthorizedError('Login or password is wrong');
   }
   if (!(await bcrypt.compare(password, user.password))) {
-    throw new NotAuthorizedError("Login or password is wrong");
+    throw new NotAuthorizedError('Login or password is wrong');
   }
 
   const token = jwt.sign(
@@ -19,7 +19,7 @@ const loginService = async (login, password) => {
       _id: user._id,
       createdAt: user.createdAt,
     },
-    process.env.JWT_SECRET
+    process.env.JWT_SECRET,
   );
 
   await User.findByIdAndUpdate(user._id, { token });
@@ -37,7 +37,13 @@ const registrationService = async (name, login, password) => {
   loginService(login, password);
 };
 
+const logoutService = async id => {
+  const data = await User.updateOne({ _id: id }, { token: null });
+  return data;
+};
+
 module.exports = {
   registrationService,
   loginService,
+  logoutService,
 };
