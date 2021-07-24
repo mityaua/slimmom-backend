@@ -48,8 +48,8 @@ const getCalories = async (
   return { calories, foodList };
 };
 
-const getProduct = async () => {
-  return await Product.find();
+const getProduct = async query => {
+  return await Product.find({ title: { ru: query } });
 };
 
 module.exports = {
@@ -57,4 +57,5 @@ module.exports = {
   removeProduct,
   addProduct,
   getCalories,
+  getProduct,
 };

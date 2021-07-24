@@ -3,7 +3,7 @@ const router = express.Router();
 const productsController = require('../controllers/productsController');
 const { authMiddleware } = require('../middlewares/authMiddleware');
 
-router.get('/', authMiddleware, productsController.listProductsPerDay);
+router.get('/', productsController.listProductsPerDay);
 
 router.post('/', authMiddleware, productsController.addProductPerDay);
 
@@ -18,12 +18,9 @@ router.post('/getmycaloriespublic', productsController.caloriesNormalize);
 router.post(
   '/getmycalories',
   authMiddleware,
-  productsController.caloriesNormalize,
+  productsController.caloriesNormalizePrivate,
 );
-router.post(
-  '?queryproduct',
-  authMiddleware,
-  productsController.caloriesNormalize,
-);
+
+router.get(':query', productsController.getProductByName);
 
 module.exports = router;
