@@ -1,23 +1,25 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const { asyncWrapper } = require("../helpers/apiHelpers");
+const { asyncWrapper } = require('../helpers/apiHelpers');
 
 const {
   registrationController,
   loginController,
-} = require("../controllers/authController");
+  logoutController,
+} = require('../controllers/authController');
 
 const {
   registrationValidation,
   loginValidation,
-} = require("../middlewares/authValidation");
+} = require('../middlewares/authValidation');
 
 router.post(
-  "/registration",
+  '/registration',
   registrationValidation,
-  asyncWrapper(registrationController)
+  asyncWrapper(registrationController),
 );
-router.post("/login", loginValidation, asyncWrapper(loginController));
+router.post('/login', loginValidation, asyncWrapper(loginController));
+router.post('/logout', asyncWrapper(logoutController));
 
 module.exports = router;
