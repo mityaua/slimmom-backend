@@ -2,13 +2,12 @@ const Day = require('../../models/dayModel');
 const { calculateDaySummary } = require('./calculateDaySummary');
 
 const findDayByIdAndUpdateDaySummary = async (dayId, daySummary) => {
-  return await Day.findByIdAndUpdate(dayId, { daySummary }, { new: true });
+  return await Day.findByIdAndUpdate(dayId, { daySummary }, { new: false });
 };
 const updateDaySummary = async (day, dailyRate) => {
   try {
     console.log(day);
     const { id, eatenProducts } = day;
-
     const kcal = eatenProducts.reduce((sumCalories, product) => {
       return sumCalories + product.kcal;
     }, 0);
