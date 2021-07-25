@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { Schema } = mongoose;
+const { Schema, model } = mongoose;
 
 const daySchema = new Schema({
   eatenProducts: [
@@ -19,6 +19,6 @@ const daySchema = new Schema({
   notAllowedProducts: { type: Array },
 });
 
-const dayModel = mongoose.model('Day', daySchema);
+const dayModel = model('Day', daySchema);
 
 module.exports = dayModel;
