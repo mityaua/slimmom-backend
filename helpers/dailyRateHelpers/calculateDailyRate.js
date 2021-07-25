@@ -1,6 +1,10 @@
-const calculateDailyRate = ({ weight, height, age, desiredWeight }) => {
+const calculateDailyRate = ({ currentWeight, height, age, desiredWeight }) => {
   return (
-    10 * weight + 6.25 * height - 5 * age - 161 - 10 * (weight - desiredWeight)
+    10 * currentWeight +
+    6.25 * height -
+    5 * age -
+    161 -
+    10 * (currentWeight - desiredWeight)
   );
 };
 

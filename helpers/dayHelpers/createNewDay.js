@@ -1,4 +1,5 @@
 const Day = require('../../models/dayModel');
+const User = require('../../models/userModel');
 
 const { calculateEatenProduct } = require('./calculateEatenProduct');
 const { calculateDaySummary } = require('./calculateDaySummary');
@@ -6,9 +7,10 @@ const { isNotAllowedProduct } = require('./isNotAllowedProduct');
 
 const findUserByIdAndUpdateDays = async (userId, day) => {
   const { _id, date } = day;
-  return await User.findByIdAndUpdate(userId, {
+  const updateDays = await User.findByIdAndUpdate(userId, {
     $push: { days: { id: _id, date } },
   });
+  return updateDays;
 };
 
 const createNewDay = async (currentUser, date, eatenProduct, weight) => {

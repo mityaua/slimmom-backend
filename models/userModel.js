@@ -21,7 +21,7 @@ const userSchema = new Schema({
     default: null,
   },
   userData: {
-    weight: { type: Number, required: true, default: 0 },
+    currentWeight: { type: Number, required: true, default: 0 },
     height: { type: Number, required: true, default: 0 },
     age: { type: Number, required: true, default: 0 },
     desiredWeight: { type: Number, required: true, default: 0 },
@@ -39,6 +39,4 @@ userSchema.pre('save', async function () {
 
 const User = model('User', userSchema);
 
-module.exports = {
-  User,
-};
+module.exports = User;
