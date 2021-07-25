@@ -1,24 +1,18 @@
 const mongoose = require('mongoose');
-const { Schema, SchemaTypes, model } = mongoose;
+const { Schema, model } = mongoose;
 
 const productSchema = new Schema({
   title: {
-    ru: {
-      type: String,
-      default: null,
-    },
+    ru: { type: String, required: true },
   },
-  calories: {
-    type: String,
-    default: null,
-  },
-  weight: {
-    type: Number,
-    default: null,
-  },
-  owner: {
-    type: SchemaTypes.ObjectId,
-    ref: 'user',
+  categories: [{ type: String }],
+  calories: { type: Number, required: true },
+  weight: { type: Number, required: true },
+  groupBloodNotAllowed: {
+    1: { type: Boolean, required: true },
+    2: { type: Boolean, required: true },
+    3: { type: Boolean, required: true },
+    4: { type: Boolean, required: true },
   },
 });
 

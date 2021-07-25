@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { Schema, model } = mongoose;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -19,30 +20,15 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  // предположительно както так (Витя)
-  // stats: {
-  //   height: {
-  //     type: Number,
-  //     required: true,
-  //   },
-  //   age: {
-  //     type: Number,
-  //     required: true,
-  //   },
-  //   currentWeight: {
-  //     type: Number,
-  //     required: true,
-  //   },
-  //   desiredWeight: {
-  //     type: Number,
-  //     required: true,
-  //   },
-  //   bloodType: {
-  //     type: Number,
-  //     required: true,
-  //     default: 1,
-  //   },
-  // },
+  userData: {
+    weight: { type: Number, required: true, default: 0 },
+    height: { type: Number, required: true, default: 0 },
+    age: { type: Number, required: true, default: 0 },
+    desiredWeight: { type: Number, required: true, default: 0 },
+    bloodType: { type: Number, enum: [1, 2, 3, 4], default: 1 },
+    dailyRate: { type: Number, required: true, default: 0 },
+  },
+  days: { type: Array },
 });
 
 userSchema.pre('save', async function () {
@@ -51,7 +37,7 @@ userSchema.pre('save', async function () {
   }
 });
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
 module.exports = {
   User,
