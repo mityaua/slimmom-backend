@@ -1,20 +1,20 @@
 ### todo list
 
-### routs
+# routs
 
-GET : /product?search={название}
+## GET : /product?search={название}
 
-POST : /auth/register
+## POST : /auth/register
 
-{ "name": "Maks", “login”:”MaksYary”, "password": "MaksYary", }
+`{ "name": "Maks", “login”:”MaksYary”, "password": "MaksYary", }`
 
-POST : /auth/login
+## POST : /auth/login
 
 { "login": "MaksYary", "password": "MaksYary" }
 
 ## POST : /auth/logout
 
-POST : /daily-rate
+`-` POST : /daily-rate
 
 { "currentWeight": 105, "height": 179, "age": 26, "desiredWeight": 80,
 "bloodType": 2 }
