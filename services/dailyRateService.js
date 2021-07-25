@@ -7,11 +7,12 @@ const {
   calculateDailyRate,
 } = require('../helpers/dailyRateHelpers/calculateDailyRate');
 
-const findUserByIdAndUpdateUserData = async (userId, reqBody, dailyRate) => {
+const findUserByIdAndUpdateUserData = (userId, reqBody, dailyRate) => {
   try {
-    return await User.findByIdAndUpdate(
+    console.log('тут');
+    return User.findByIdAndUpdate(
       userId,
-      { userData: { ...reqBody, dailyRate } },
+      { $push: { userData: { ...reqBody, dailyRate } } },
       { new: true },
     );
   } catch (error) {
@@ -29,17 +30,13 @@ const getDailyRateUser = async (reqBody, userId) => {
     );
 
     const currentDate = new Date().toLocaleDateString('fr-ca');
-
     const existingDay = currentUser.days.find(
       ({ date }) => date === currentDate,
     );
-
     if (existingDay) {
       const day = await Day.findById(existingDay.id);
-
       return await updateDaySummary(day, dailyRate);
     }
-
     return await createNewDay(currentUser, currentDate);
   } catch (error) {
     throw error;
