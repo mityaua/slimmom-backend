@@ -1,4 +1,4 @@
-const Joi = require("joi");
+const Joi = require('joi');
 
 module.exports = {
   registrationValidation: (req, res, next) => {
@@ -10,7 +10,7 @@ module.exports = {
 
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      return res.status(400).json({ status: validationResult.error.details });
+      return res.status(400).json({ status: validationResult.error.message });
     }
 
     next();
@@ -24,7 +24,7 @@ module.exports = {
 
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      return res.status(400).json({ status: validationResult.error.details });
+      return res.status(400).json({ status: validationResult.error.message });
     }
 
     next();

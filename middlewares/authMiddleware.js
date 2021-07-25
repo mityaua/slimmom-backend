@@ -11,21 +11,32 @@ const authMiddleware = async (req, res, next) => {
     next(new NotAuthorizedError('Not authorized'));
   }
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    if (req.headers.authorization !== undefined) {
+      const token = req.headers.authorization.split(' ')[1];
 
-    jwt.verify(token, JWT_SECRET, async (error, decoded) => {
-      const user = await User.getUserById(decoded?._id);
-      if (error || !user || !user.token || user.token !== token) {
-        next(new NotAuthorizedError('Invalide token'));
-      }
-      req.user = user;
-      next();
-    });
+      jwt.verify(token, JWT_SECRET, async (error, decoded) => {
+        const user = await User.getUserById(decoded?._id);
+        if (error || !user || !user.token || user.token !== token) {
+          next(new NotAuthorizedError('Invalide token'));
+        }
+        req.user = user;
+        next();
+      });
+    }
   } catch (error) {
     next(error);
   }
 };
 
+const getUserIdFromToken = token => {
+  let user = '';
+  jwt.verify(token, JWT_SECRET, (error, decoded) => {
+    user = decoded?._id;
+  });
+  return user;
+};
+
 module.exports = {
   authMiddleware,
+  getUserIdFromToken,
 };

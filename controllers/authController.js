@@ -4,6 +4,8 @@ const {
   logoutService,
 } = require('../services/authService');
 
+const { getUserIdFromToken } = require('../middlewares/authMiddleware');
+
 const registrationController = async (req, res) => {
   const { name, login, password } = req.body;
   await registrationService(name, login, password);
@@ -17,8 +19,10 @@ const loginController = async (req, res) => {
 };
 
 const logoutController = async (req, res) => {
-  await logoutService(req.user.id);
-  res.status(204);
+  const token = req.headers.authorization.split(' ')[1];
+  const id = getUserIdFromToken(token);
+  await logoutService(id);
+  res.status(204).end();
 };
 
 module.exports = {
