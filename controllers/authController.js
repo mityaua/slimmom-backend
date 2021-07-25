@@ -7,10 +7,10 @@ const {
 const registrationController = async (req, res) => {
   const { name, login, password } = req.body;
   await registrationService(name, login, password);
-  res.json({ status: 'success' });
+  res.status(201).json({ status: 'success' });
 };
 
-const loginController = async (req, res, next) => {
+const loginController = async (req, res) => {
   const { login, password } = req.body;
   const user = await loginService(login, password);
   res.json({ status: 'success', login, token: user });
