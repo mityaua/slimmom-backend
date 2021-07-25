@@ -15,10 +15,8 @@ const addProductPerDayController = async (req, res, next) => {
 
 const deleteProductPerDayController = async (req, res, next) => {
   const { dayId, eatenProductId } = req.body;
-
   try {
     const daySummary = await deleteProductPerDay(dayId, eatenProductId);
-
     return res.status(201).json(daySummary);
   } catch (error) {
     next(error);

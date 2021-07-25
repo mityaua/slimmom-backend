@@ -36,6 +36,7 @@ const getDailyRateUser = async (reqBody, userId) => {
     console.log(existingDay.id);
     if (existingDay) {
       const day = await Day.findById(existingDay.id);
+      // не приходит день
       console.log(day);
       return await updateDaySummary(day, dailyRate);
     }

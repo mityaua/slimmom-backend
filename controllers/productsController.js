@@ -1,11 +1,11 @@
 const Product = require('../services/productService');
 const { NotFoundError } = require('../helpers/errors');
 
-const getProduct = async (req, res, next) => {
+const getProduct = async (req, res) => {
   try {
     const { search } = req.query;
-    const products = await Product.getProducts(search);
-    return res.status(200).json(products);
+    const product = await Product.getProducts(search);
+    return res.status(200).json(product);
   } catch (error) {
     throw new NotFoundError('Product not found');
   }
