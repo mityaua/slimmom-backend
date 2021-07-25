@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { Schema, model } = mongoose;
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -27,6 +28,7 @@ const userSchema = new mongoose.Schema({
     bloodType: { type: Number, enum: [1, 2, 3, 4], default: 1 },
     dailyRate: { type: Number, required: true, default: 0 },
   },
+  days: { type: Array },
 });
 
 userSchema.pre('save', async function () {
@@ -35,7 +37,7 @@ userSchema.pre('save', async function () {
   }
 });
 
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
 module.exports = {
   User,
