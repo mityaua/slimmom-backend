@@ -7,6 +7,7 @@ const app = express();
 
 const authRouter = require('./routes/auth');
 const productRouter = require('./routes/product');
+const userRouter = require('./routes/user');
 const { errorHandler } = require('./helpers/apiHelpers');
 
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
@@ -16,10 +17,8 @@ app.use(cors());
 app.use(express.json({ limit: 1000 }));
 
 app.use('/users', authRouter);
+app.use('/user', userRouter);
 app.use('/products', productRouter);
-
-// пока закомментил (Витя)
-// app.use(express.static(process.env.PUBLIC_DIR))
 
 // Ответ на всех урлы, которые не заматчились
 app.use((req, res) => {
