@@ -1,7 +1,5 @@
 ### todo list
 
-# routs
-
 ## GET : /product?search={название}
 
 ## POST : /auth/register
@@ -10,33 +8,32 @@
 
 ## POST : /auth/login
 
-{ "login": "MaksYary", "password": "MaksYary" }
+`{ "login": "MaksYary", "password": "MaksYary" }`
 
 ## POST : /auth/logout
 
-`-` POST : /daily-rate
+`-`
 
-{ "currentWeight": 105, "height": 179, "age": 26, "desiredWeight": 80,
-"bloodType": 2 }
+## POST : /daily-rate
 
-POST : /daily-rate/{userId} USERID
+`{ "currentWeight": 105, "height": 179, "age": 26, "desiredWeight": 80, "bloodType": 2 }`
 
-{ "currentWeight": 105, "height": 179, "age": 26, "desiredWeight": 80,
-"bloodType": 2 }
+## POST : /daily-rate/{userId} USERID
 
-POST : /day
+`{ "currentWeight": 105, "height": 179, "age": 26, "desiredWeight": 80, "bloodType": 2 }`
 
-{ "date": "2021-07-25", "productId": "5d51694802b2373622ff552f", "weight": 200 }
+## POST : /day
 
-DELETE : /day
+`{ "date": "2021-07-25", "productId": "5d51694802b2373622ff552f", "weight": 200 }`
 
-{ "dayId": "5feab238a8aaaa4aa4ea08bsda76b", "eatenProductId":
-"5feaa504ac348a44e08b76ac" }
+## DELETE : /day
 
-POST : /day/info
+`{ "dayId": "5feab238a8aaaa4aa4ea08bsda76b", "eatenProductId": "5feaa504ac348a44e08b76ac" }`
 
-{ "date": "2021-07-25" }
+## POST : /day/info
 
-GET /user
+`{ "date": "2021-07-25" }`
 
--
+## GET /user
+
+`-`
