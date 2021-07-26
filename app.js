@@ -3,6 +3,8 @@ const logger = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
 
+const { NotFoundError } = require('./helpers/errors');
+
 const app = express();
 
 const authRouter = require('./routes/auth');
@@ -28,7 +30,7 @@ app.use('/daily-rate', dailyRateRouter);
 
 // Ответ на всех урлы, которые не заматчились
 app.use((req, res) => {
-  res.status(404).json({ message: 'Not found' });
+  throw new NotFoundError(`Not found`);
 });
 
 // app.use() // Обработчик всех ошибок - добавить
