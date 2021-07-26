@@ -14,7 +14,7 @@ const loginService = async (login, password) => {
     throw new NotAuthorizedError('Login or password is wrong');
   }
 
-  const token = jwt.sign(
+  const accessToken = jwt.sign(
     {
       _id: user._id,
       createdAt: user.createdAt,
@@ -22,8 +22,8 @@ const loginService = async (login, password) => {
     process.env.JWT_SECRET,
   );
 
-  await User.findByIdAndUpdate(user._id, { token });
-  return token;
+  await User.findByIdAndUpdate(user._id, { accessToken });
+  return accessToken;
 };
 
 const signUpService = async (name, login, password) => {
@@ -39,7 +39,7 @@ const signUpService = async (name, login, password) => {
 };
 
 const logoutService = async id => {
-  const data = await User.updateOne({ _id: id }, { token: null });
+  const data = await User.updateOne({ _id: id }, { accessToken: null });
   return data;
 };
 

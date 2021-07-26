@@ -16,9 +16,11 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  token: {
+  accessToken: {
     type: String,
-    default: null,
+  },
+  refreshToken: {
+    type: String,
   },
   userData: {
     currentWeight: { type: Number, required: true, default: 0 },

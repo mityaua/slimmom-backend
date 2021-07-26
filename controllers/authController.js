@@ -20,12 +20,12 @@ const signUpController = async (req, res) => {
 const loginController = async (req, res) => {
   const { login, password } = req.body;
   const user = await loginService(login, password);
-  res.json({ status: 'success', login, token: user });
+  res.json({ status: 'success', login, accessToken: user });
 };
 
 const logoutController = async (req, res) => {
-  const token = req.headers.authorization.split(' ')[1];
-  const id = getUserIdFromToken(token);
+  const accessToken = req.headers.authorization.split(' ')[1];
+  const id = getUserIdFromToken(accessToken);
   await logoutService(id);
   res.status(204).end();
 };

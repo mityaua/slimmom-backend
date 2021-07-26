@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../services/userService');
-const JWT_SECRET = process.env.JWT_SECRET;
+const config = require('../config/auth.config');
 const { NotAuthorizedError } = require('../helpers/errors');
 
 const authMiddleware = async (req, res, next) => {
@@ -13,11 +13,16 @@ const authMiddleware = async (req, res, next) => {
 
   try {
     if (req.headers.authorization !== undefined) {
-      const token = req.headers.authorization.split(' ')[1];
+      const accessToken = req.headers.authorization.split(' ')[1];
 
-      jwt.verify(token, JWT_SECRET, async (error, decoded) => {
+      jwt.verify(accessToken, config.secret, async (error, decoded) => {
         const user = await User.getUserById(decoded?._id);
-        if (error || !user || !user.token || user.token !== token) {
+        if (
+          error ||
+          !user ||
+          !user.accessToken ||
+          user.accessToken !== accessToken
+        ) {
           next(new NotAuthorizedError('Invalide token'));
         }
         req.user = user;
@@ -29,10 +34,10 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-const getUserIdFromToken = token => {
+const getUserIdFromToken = accessToken => {
   let user;
-  jwt.verify(token, JWT_SECRET, (error, decoded) => {
-    user = decoded?._id;
+  jwt.verify(accessToken, config.secret, (error, decoded) => {
+    user = decoded._id;
   });
   return user;
 };
