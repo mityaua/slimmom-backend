@@ -30,7 +30,7 @@ const authMiddleware = async (req, res, next) => {
 };
 
 const getUserIdFromToken = token => {
-  let user = '';
+  let user;
   jwt.verify(token, JWT_SECRET, (error, decoded) => {
     user = decoded?._id;
   });

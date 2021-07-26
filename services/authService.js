@@ -26,7 +26,7 @@ const loginService = async (login, password) => {
   return token;
 };
 
-const registrationService = async (name, login, password) => {
+const signUpService = async (name, login, password) => {
   const user = new User({
     name,
     login,
@@ -44,7 +44,7 @@ const logoutService = async id => {
 };
 
 module.exports = {
-  registrationService,
+  signUpService,
   loginService,
   logoutService,
 };
