@@ -1,7 +1,7 @@
 const Joi = require('joi');
 
 module.exports = {
-  registrationValidation: (req, res, next) => {
+  signUpValidation: (req, res, next) => {
     const schema = Joi.object({
       name: Joi.string().min(3).max(30).required(),
       login: Joi.string().min(3).max(30).required(),

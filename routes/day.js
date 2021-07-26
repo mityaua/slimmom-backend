@@ -8,10 +8,26 @@ const {
   infoPerDayController,
 } = require('../controllers/dayController');
 
-router.post('/', authMiddleware, addProductPerDayController);
+const {
+  validateAddProduct,
+  validateDeleteProduct,
+  validateInfoDay,
+} = require('../middlewares/dayValidation');
 
-router.delete('/', authMiddleware, deleteProductPerDayController);
+router.post(
+  '/',
+  authMiddleware,
+  validateAddProduct,
+  addProductPerDayController,
+);
 
-router.post('/info', authMiddleware, infoPerDayController);
+router.delete(
+  '/',
+  authMiddleware,
+  validateDeleteProduct,
+  deleteProductPerDayController,
+);
+
+router.post('/info', authMiddleware, validateInfoDay, infoPerDayController);
 
 module.exports = router;

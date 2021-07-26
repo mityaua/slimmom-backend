@@ -4,21 +4,17 @@ const router = express.Router();
 const { asyncWrapper } = require('../helpers/apiHelpers');
 
 const {
-  registrationController,
+  signUpController,
   loginController,
   logoutController,
 } = require('../controllers/authController');
 
 const {
-  registrationValidation,
+  signUpValidation,
   loginValidation,
 } = require('../middlewares/authValidation');
 
-router.post(
-  '/registration',
-  registrationValidation,
-  asyncWrapper(registrationController),
-);
+router.post('/signup', signUpValidation, asyncWrapper(signUpController));
 router.post('/login', loginValidation, asyncWrapper(loginController));
 router.post('/logout', asyncWrapper(logoutController));
 

@@ -31,7 +31,7 @@ Bearer {koten}
 
 ## DELETE : /day
 
-`{ "dayId": "5feab238a8aaaa4aa4ea08bsda76b", "eatenProductId": "5feaa504ac348a44e08b76ac" }`
+`{ "dayId": "5d51694802b2373622ff552f", "eatenProductId": "5feaa504ac348a44e08b76ac" }`
 
 ## POST : /day/info
 
