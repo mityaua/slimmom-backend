@@ -32,6 +32,7 @@ const registrationService = async (name, login, password) => {
     login,
     password,
   });
+
   await user.save();
   // сразу логин после регистрации
   loginService(login, password);

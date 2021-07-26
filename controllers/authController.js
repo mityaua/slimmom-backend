@@ -1,3 +1,4 @@
+const User = require('../models/userModel');
 const {
   registrationService,
   loginService,
@@ -8,6 +9,13 @@ const { getUserIdFromToken } = require('../middlewares/authMiddleware');
 
 const registrationController = async (req, res) => {
   const { name, login, password } = req.body;
+
+  const user = await User.findOne({ login: login });
+
+  if (user) {
+    return res.status(409).json({ message: 'Login in use' });
+  }
+
   await registrationService(name, login, password);
   res.status(201).json({ status: 'success' });
 };
