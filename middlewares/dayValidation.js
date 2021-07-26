@@ -10,7 +10,7 @@ module.exports = {
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      next(NotFoundError('Invalid request body'));
+      new NotFoundError('Invalid request body');
     }
     next();
   },
@@ -22,7 +22,7 @@ module.exports = {
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      next(NotFoundError('Invalid request body'));
+      new NotFoundError('Invalid request body');
     }
     next();
   },
@@ -33,7 +33,7 @@ module.exports = {
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      next(NotFoundError('Invalid request body'));
+      new NotFoundError('Invalid request body');
     }
     next();
   },

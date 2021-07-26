@@ -30,7 +30,7 @@ const addProductPerDay = async (reqBody, user) => {
 
 const deleteProductPerDay = async (dayId, eatenProductId) => {
   try {
-    const currentDay = await User.findById(dayId);
+    const currentDay = await Day.findById(dayId);
 
     const { eatenProducts, daySummary } = currentDay;
 

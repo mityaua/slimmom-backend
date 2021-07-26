@@ -12,7 +12,7 @@ module.exports = {
     });
     const validationResult = schema.validate(req.body);
     if (validationResult.error) {
-      next(NotAuthorizedError('Invalid data'));
+      new NotAuthorizedError('Invalid data');
     }
     next();
   },
