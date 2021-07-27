@@ -35,13 +35,16 @@ const notAllowedProductsObj = async bloodType => {
   arr = Object.values(arr);
   let unique = [...new Set(arr)];
 
-  let random = [];
+  // let random = [];
 
-  for (let i = 0; i < 5; i++) {
-    random[i] = unique[Math.floor(Math.random() * unique.length)];
+  // for (let i = 0; i < 5; i++) {
+  //   random[i] = unique[Math.floor(Math.random() * unique.length)];
+  // }
+
+  if (unique.length === 0) {
+    unique = ['Кушать можно все'];
   }
-
-  return random;
+  return unique;
 };
 
 module.exports = { getDailyRateUserController, getDailyRateController };
