@@ -6,16 +6,24 @@ const { createNewDay } = require('../helpers/dayHelpers/createNewDay');
 const {
   calculateDailyRate,
 } = require('../helpers/dailyRateHelpers/calculateDailyRate');
-const {
-  notAllowedProducts,
-} = require('../helpers/dailyRateHelpers/notAllowedProducts');
 
-const findUserByIdAndUpdateUserData = async (userId, reqBody, dailyRate) => {
+const findUserByIdAndUpdateUserData = async (
+  userId,
+  reqBody,
+  dailyRate,
+  notAllowedProducts,
+  notAllowedProductsAll,
+) => {
   try {
     const UserData = await User.findByIdAndUpdate(
       userId,
       {
-        userData: { ...reqBody, dailyRate },
+        userData: {
+          ...reqBody,
+          dailyRate,
+          notAllowedProducts,
+          notAllowedProductsAll,
+        },
       },
       { new: true },
     );
@@ -25,13 +33,20 @@ const findUserByIdAndUpdateUserData = async (userId, reqBody, dailyRate) => {
   }
 };
 
-const getDailyRateUser = async (reqBody, userId, unique) => {
+const getDailyRateUser = async (
+  reqBody,
+  userId,
+  notAllowedProducts,
+  notAllowedProductsAll,
+) => {
   try {
-    const dailyRate = calculateDailyRate(reqBody);
+    const dailyRate = await calculateDailyRate(reqBody);
     const currentUser = await findUserByIdAndUpdateUserData(
       userId,
       reqBody,
       dailyRate,
+      notAllowedProducts,
+      notAllowedProductsAll,
     );
 
     const currentDate = new Date().toLocaleDateString('fr-ca');
@@ -40,9 +55,10 @@ const getDailyRateUser = async (reqBody, userId, unique) => {
     );
     if (existingDay) {
       const day = await Day.findById(existingDay.id);
-      return await updateDaySummary(day, dailyRate, unique);
+      return await updateDaySummary(day, dailyRate);
     }
-    return await createNewDay(currentUser, currentDate, unique);
+
+    return await createNewDay(currentUser, currentDate);
   } catch (error) {
     throw error;
   }
