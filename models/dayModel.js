@@ -16,7 +16,6 @@ const daySchema = new Schema({
     dailyRate: { type: Number, required: true },
     percentsOfDailyRate: { type: Number, required: true },
   },
-  notAllowedProducts: { type: Array },
 });
 
 const dayModel = model('Day', daySchema);

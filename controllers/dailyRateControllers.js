@@ -4,14 +4,19 @@ const {
 
 const { getDailyRateUser } = require('../services/dailyRateService');
 const {
-  notAllowedProducts,
-} = require('../helpers/dailyRateHelpers/notAllowedProducts');
+  notAllowedProductsBloodType,
+} = require('../helpers/dailyRateHelpers/notAllowedProductsBloodType');
 
 const getDailyRateController = async (req, res, next) => {
   try {
     const dailyRate = await calculateDailyRate(req.body);
-    const unique = await notAllowedProductsObj(req.body.bloodType);
-    return res.status(200).json({ dailyRate, notAllowedProducts: unique });
+    const { notAllowedProducts, notAllowedProductsAll } =
+      await notAllowedProductsObj(req.body.bloodType);
+    return res.status(200).json({
+      dailyRate,
+      notAllowedProducts: notAllowedProducts,
+      notAllowedProductsAll: notAllowedProductsAll,
+    });
   } catch (error) {
     next(error);
   }
@@ -20,8 +25,15 @@ const getDailyRateController = async (req, res, next) => {
 const getDailyRateUserController = async (req, res, next) => {
   const userId = req.params.userId;
   try {
-    const unique = await notAllowedProductsObj(req.body.bloodType);
-    const currentDay = await getDailyRateUser(req.body, userId, unique);
+    const { notAllowedProducts, notAllowedProductsAll } =
+      await notAllowedProductsObj(req.body.bloodType);
+
+    const currentDay = await getDailyRateUser(
+      req.body,
+      userId,
+      notAllowedProducts,
+      notAllowedProductsAll,
+    );
     return res.status(200).json(currentDay);
   } catch (error) {
     next(error);
@@ -29,22 +41,29 @@ const getDailyRateUserController = async (req, res, next) => {
 };
 
 const notAllowedProductsObj = async bloodType => {
-  const notAllowedProductsArray = await notAllowedProducts(bloodType);
+  const notAllowedProductsArray = await notAllowedProductsBloodType(bloodType);
   let arr = [];
   notAllowedProductsArray.map(({ title }) => arr.push(title.ru));
   arr = Object.values(arr);
-  let unique = [...new Set(arr)];
+  let notAllowedProductsAll = [...new Set(arr)];
+  let notAllowedProducts = [];
 
-  // let random = [];
-
-  // for (let i = 0; i < 5; i++) {
-  //   random[i] = unique[Math.floor(Math.random() * unique.length)];
-  // }
-
-  if (unique.length === 0) {
-    unique = ['Кушать можно все'];
+  for (let i = 0; i < 5; i++) {
+    notAllowedProducts[i] =
+      notAllowedProductsAll[
+        Math.floor(Math.random() * notAllowedProductsAll.length)
+      ];
   }
-  return unique;
+
+  if (notAllowedProductsAll.length === 0) {
+    notAllowedProductsAll = ['Кушать можно все'];
+  }
+
+  if (notAllowedProducts[0] === undefined) {
+    notAllowedProducts = ['Кушать можно все'];
+  }
+  const result = { notAllowedProductsAll, notAllowedProducts };
+  return result;
 };
 
 module.exports = { getDailyRateUserController, getDailyRateController };

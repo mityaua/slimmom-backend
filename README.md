@@ -5,9 +5,9 @@ Bearer {koten}
 
 ## GET : /product?search={название}
 
-## POST : /auth/register
+## POST : /auth/signup
 
-`{ "name": "Maks", “login”:”MaksYary”, "password": "MaksYary", }`
+`{ "name": "Maks", "login":"MaksYary", "password": "MaksYary" }`
 
 ## POST : /auth/login
 
