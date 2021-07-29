@@ -1,7 +1,7 @@
 ### todo list
 
 При всех запросах кроме `POST : /daily-rate` нужен Headers: Autorization :
-Bearer {koten}
+Bearer {token}
 
 ## GET : /product?search={название}
 
