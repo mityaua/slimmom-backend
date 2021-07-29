@@ -1,11 +1,11 @@
 ### todo list
 
 При всех запросах кроме `POST : /daily-rate` нужен Headers: Autorization :
-Bearer {koten}
+Bearer {token}
 
 ## GET : /product?search={название}
 
-## POST : /auth/register
+## POST : /auth/signup
 
 `{ "name": "Maks", “login”:”MaksYary”, "password": "MaksYary", }`
 

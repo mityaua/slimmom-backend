@@ -16,6 +16,22 @@
     {
       "name": "Auth",
       "description": "Authorization endpoints"
+    },
+    {
+      "name": "Product",
+      "description": "Search specified product endpoint"
+    },
+    {
+      "name": "Daily-rate",
+      "description": "Daily-rate endpoints"
+    },
+    {
+      "name": "Day",
+      "description": "Day endpoints"
+    },
+    {
+      "name": "User",
+      "description": "User endpoint"
     }
   ],
 
@@ -26,7 +42,7 @@
         "summary": "User registration",
         "parameters": [],
         "requestBody": {
-          "description": "Registration's object",
+          "description": "Registration object",
           "required": true,
           "content": {
             "application/json": {
@@ -53,6 +69,289 @@
           },
           "409": {
             "description": "Provided login already exists",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Login or password is wrong",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User logout",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": "Success",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/product?search={название}": {
+      "post": {
+        "tags": ["Product"],
+        "summary": "Get specified product",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product is not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/daily-rate": {
+      "post": {
+        "tags": ["Daily-rate"],
+        "summary": "Get user's daily rate (not registered user)",
+        "parameters": [],
+        "requestBody": {
+          "description": "Stats object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DailyRateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyRateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/daily-rate/{userId}": {
+      "post": {
+        "tags": ["Daily-rate"],
+        "summary": "Get user's daily rate (registered user)",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path"
+          }
+        ],
+        "requestBody": {
+          "description": "Stats object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DailyRateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyRateRegUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/day": {
+      "post": {
+        "tags": ["Day"],
+        "summary": "Add product",
+        "parameters": [],
+        "requestBody": {
+          "description": "Product info object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayAddProductRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DayAddProductResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "404": {
+            "description": "Product is not found",
+            "content": {}
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Day"],
+        "summary": "Delete product",
+        "parameters": [],
+        "requestBody": {
+          "description": "Product delete object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DayDeleteProductRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DayDeleteProductResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "404": {
+            "description": "Product is not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/day/info": {
+      "post": {
+        "tags": ["Day"],
+        "summary": "Date",
+        "parameters": [],
+        "requestBody": {
+          "description": "Date object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "User info",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No user found",
             "content": {}
           }
         }
@@ -90,6 +389,85 @@
             "type": "string",
             "description": "Registartion status",
             "example": "success"
+          }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["login", "password"],
+        "properties": {
+          "login": {
+            "type": "string",
+            "description": "User's login",
+            "example": "Krabaton2000"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "qwerty123"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "required": ["login", "password"],
+        "properties": {
+          "login": {
+            "type": "string",
+            "description": "User's login",
+            "example": "Krabaton2000"
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "User's token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTAxYWFiZGQxZjQ0ZjU0NjhkN2VlZjIiLCJpYXQiOjE2Mjc0OTkyMTV9.oVa5pYh0RERJwdrZwbOh0_APJL6T39_6x3JozV6wkpA"
+          }
+        }
+      },
+      "ProductResponse": {
+        "type": "object",
+        "properties": {
+          "Product": {
+            "type": "string",
+            "description": "Product",
+            "example": "<Name of the product>"
+          }
+        }
+      },
+      "DailyRateRequest": {
+        "type": "object",
+        "required": [
+          "currentWeight",
+          "height",
+          "age",
+          "desiredWeight",
+          "bloodType"
+        ],
+        "properties": {
+          "currentWeight": {
+            "type": "number",
+            "description": "User's current weight",
+            "example": "60"
+          },
+          "height": {
+            "type": "number",
+            "description": "User's height",
+            "example": "165"
+          },
+          "age": {
+            "type": "number",
+            "description": "User's age",
+            "example": "25"
+          },
+          "desiredWeight": {
+            "type": "number",
+            "description": "User's desired weight",
+            "example": "55"
+          },
+          "bloodType": {
+            "type": "number",
+            "description": "User's blood type",
+            "example": "4"
           }
         }
       }

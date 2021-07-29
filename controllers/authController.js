@@ -20,7 +20,7 @@ const signUpController = async (req, res) => {
 const loginController = async (req, res) => {
   const { login, password } = req.body;
   const user = await loginService(login, password);
-  res.json({ status: 'success', login, accessToken: user });
+  res.status(200).json({ status: 'success', login, accessToken: user });
 };
 
 const logoutController = async (req, res) => {
