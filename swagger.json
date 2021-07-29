@@ -470,6 +470,199 @@
             "example": "4"
           }
         }
+      },
+      "DailyRateResponse": {
+        "type": "object",
+        "properties": {
+          "dailyRate": {
+            "type": "number",
+            "description": "Calories",
+            "example": "1500"
+          },
+          "notAllowedProducts": {
+            "type": "array",
+            "description": "Some not allowed products",
+            "example": ["names of the products"]
+          },
+          "notAllowedProductsAll": {
+            "type": "array",
+            "description": "All not allowed products",
+            "example": ["names of the products"]
+          }
+        }
+      },
+      "DailyRateRegUserResponse": {
+        "type": "object",
+        "properties": {
+          "kcalLeft": {
+            "type": "number",
+            "description": "Calories left",
+            "example": "1250"
+          },
+          "kcalConsumed": {
+            "type": "number",
+            "description": "Calories consumed",
+            "example": "250"
+          },
+          "dailyRate": {
+            "type": "number",
+            "description": "Total calories",
+            "example": "1500"
+          },
+          "percentsOfDailyRate": {
+            "type": "number",
+            "description": "Percent of daily rate",
+            "example": "percent"
+          },
+          "userId": {
+            "type": "string",
+            "description": "User's id",
+            "example": "60fd86dc70c2653e78ec10dq"
+          },
+          "notAllowedProducts": {
+            "type": "array",
+            "description": "All not allowed products",
+            "example": ["names of the products"]
+          },
+          "notAllowedProductsAll": {
+            "type": "array",
+            "description": "All not allowed products",
+            "example": ["names of the products"]
+          }
+        }
+      },
+      "DayAddProductRequest": {
+        "type": "object",
+        "required": ["date", "productId", "weight "],
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "Day",
+            "example": "20.06.2020"
+          },
+          "productId": {
+            "type": "string",
+            "description": "Product's id",
+            "example": "5d51694802b2373622ff553b"
+          },
+          "weight": {
+            "type": "number",
+            "description": "Product's weight",
+            "example": "100"
+          }
+        }
+      },
+      "DayAddProductResponse": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "type": "string",
+            "description": "user's id",
+            "example": "60fd86dc70c2653e78ec10dq"
+          },
+          "date": {
+            "type": "string",
+            "description": "Day",
+            "example": "20.06.2020"
+          },
+          "eatenProduct": {
+            "type": "string",
+            "description": "eaten product",
+            "example": "name of eaten product"
+          },
+          "weight": {
+            "type": "number",
+            "description": "Product's weight",
+            "example": "100"
+          }
+        }
+      },
+      "DayDeleteProductRequest": {
+        "type": "object",
+        "required": ["dayId", "eatenProductId "],
+        "properties": {
+          "dayId": {
+            "type": "string",
+            "description": "Day's id",
+            "example": "5d51694802b2373622ff556b"
+          },
+          "eatenProductId": {
+            "type": "string",
+            "description": " Eaten product's id",
+            "example": "5d51694802b2373622ff553b"
+          }
+        }
+      },
+      "DayDeleteProductResponse": {
+        "type": "object",
+        "properties": {
+          "dayId": {
+            "type": "string",
+            "description": "day's id",
+            "example": "60fd86dc70c2653e78ec10dq"
+          },
+          "kcalLeft": {
+            "type": "number",
+            "description": "calories left",
+            "example": "1250"
+          },
+          "kcalConsumed": {
+            "type": "number",
+            "description": "calories consumed",
+            "example": "250"
+          },
+          "dailyRate": {
+            "type": "number",
+            "description": "total calories",
+            "example": "1500"
+          },
+          "percentsOfDailyRate": {
+            "type": "number",
+            "description": "percent of daily rate",
+            "example": "percent"
+          },
+          "updatedEatenProducts ": {
+            "type": "array",
+            "description": "updated list of eaten products",
+            "example": ["updated products"]
+          }
+        }
+      },
+      "DateRequest": {
+        "type": "object",
+        "required": ["userId", "date"],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "User's id",
+            "example": "60fd86dc70c2653e78ec10dq"
+          },
+          "date": {
+            "type": "string",
+            "description": "date",
+            "example": "20.06.2020"
+          }
+        }
+      },
+      "DateResponse": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "description": "day",
+            "example": "20.06.2020"
+          }
+        }
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "user's id",
+            "example": "60fd86dc70c2653e78ec10dq"
+          }
+        }
       }
     },
     "securitySchemes": {
