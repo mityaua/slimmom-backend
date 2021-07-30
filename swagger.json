@@ -538,7 +538,7 @@
           "date": {
             "type": "string",
             "description": "Day",
-            "example": "20.06.2020"
+            "example": "2021-07-25"
           },
           "productId": {
             "type": "string",
@@ -563,7 +563,7 @@
           "date": {
             "type": "string",
             "description": "Day",
-            "example": "20.06.2020"
+            "example": "2021-07-25"
           },
           "eatenProduct": {
             "type": "string",
@@ -635,12 +635,12 @@
           "userId": {
             "type": "string",
             "description": "User's id",
-            "example": "60fd86dc70c2653e78ec10dq"
+            "example": "60fd86dc70c2653e78ec10de"
           },
           "date": {
             "type": "string",
             "description": "date",
-            "example": "20.06.2020"
+            "example": "2021-07-25"
           }
         }
       },
@@ -649,8 +649,69 @@
         "properties": {
           "date": {
             "type": "string",
-            "description": "day",
-            "example": "20.06.2020"
+            "description": "Day's date",
+            "example": "2020-12-30"
+          },
+          "eatenProducts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "eaten product id",
+                  "example": "6101ab90d1f44f5468d7ef12"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "name of the eaten product",
+                  "example": "Омлет из яичного порошка"
+                },
+                "weight": {
+                  "type": "number",
+                  "description": "weight of eaten product",
+                  "example": "200"
+                },
+                "kcal": {
+                  "type": "number",
+                  "description": "calories of eaten product",
+                  "example": "400"
+                }
+              }
+            }
+          },
+          "_id": {
+            "type": "string",
+            "description": "day id",
+            "example": "6101ab03d1f44f5468d7eefd"
+          }
+        },
+        "daySummary": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kcalLeft": {
+                "type": "number",
+                "description": "calories left",
+                "example": "827.75"
+              },
+              "kcalConsumed": {
+                "type": "number",
+                "description": "consumed calories",
+                "example": "800"
+              },
+              "dailyRate": {
+                "type": "number",
+                "description": "daily rate",
+                "example": "1627.75"
+              },
+              "percentsOfDailyRate": {
+                "type": "number",
+                "description": "percents of daily rate",
+                "example": "49.14759637536476"
+              }
+            }
           }
         }
       },
