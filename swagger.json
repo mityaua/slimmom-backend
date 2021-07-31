@@ -11,7 +11,7 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:4040" }],
+  "servers": [{ "url": "https://slimmom-backend-fs26.herokuapp.com/" }],
   "tags": [
     {
       "name": "Auth",
