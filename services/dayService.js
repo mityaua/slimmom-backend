@@ -37,8 +37,12 @@ const deleteProductPerDay = async (dayId, eatenProductId) => {
     const updatedEatenProducts = eatenProducts.filter(product => {
       return String(product._id) !== eatenProductId;
     });
-
-    return updateCurrentDay(dayId, updatedEatenProducts, daySummary);
+    const updatedDayData = await updateCurrentDay(
+      dayId,
+      updatedEatenProducts,
+      daySummary,
+    );
+    return { eatenProducts, updatedDayData };
   } catch (error) {
     throw error;
   }
