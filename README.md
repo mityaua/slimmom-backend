@@ -3,7 +3,7 @@
 При всех запросах кроме `POST : /daily-rate` нужен Headers: Autorization :
 Bearer {token}
 
-## GET : /product?search={название}
+## GET : /products?search={название}
 
 ## POST : /auth/signup
 
