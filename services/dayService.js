@@ -42,7 +42,7 @@ const deleteProductPerDay = async (dayId, eatenProductId) => {
       updatedEatenProducts,
       daySummary,
     );
-    return { eatenProducts, updatedDayData };
+    return { updatedDayData, updatedEatenProducts };
   } catch (error) {
     throw error;
   }
