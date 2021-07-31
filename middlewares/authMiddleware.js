@@ -23,7 +23,7 @@ const authMiddleware = async (req, res, next) => {
           !user.accessToken ||
           user.accessToken !== accessToken
         ) {
-          next(new NotAuthorizedError('Invalide token'));
+          next(new NotAuthorizedError('Invalid token'));
         }
         req.user = user;
         next();
