@@ -3,9 +3,9 @@ const Joi = require('joi');
 module.exports = {
   signUpValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().min(3).max(30).required(),
-      login: Joi.string().min(3).max(30).required(),
-      password: Joi.string().alphanum().min(6).max(10).required(),
+      name: Joi.string().min(3).max(50).required(),
+      login: Joi.string().min(3).max(50).required(),
+      password: Joi.string().alphanum().min(6).max(50).required(),
     });
 
     const validationResult = schema.validate(req.body);
@@ -18,8 +18,8 @@ module.exports = {
 
   loginValidation: (req, res, next) => {
     const schema = Joi.object({
-      login: Joi.string().min(3).max(30).required(),
-      password: Joi.string().alphanum().min(6).max(10).required(),
+      login: Joi.string().min(3).max(50).required(),
+      password: Joi.string().alphanum().min(6).max(50).required(),
     });
 
     const validationResult = schema.validate(req.body);

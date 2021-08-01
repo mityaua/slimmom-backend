@@ -35,7 +35,7 @@ const signUpService = async (name, login, password) => {
 
   await user.save();
   // сразу логин после регистрации
-  loginService(login, password);
+  return await loginService(login, password);
 };
 
 const logoutService = async id => {
