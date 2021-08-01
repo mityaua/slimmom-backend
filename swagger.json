@@ -126,7 +126,7 @@
       }
     },
     "/products?search={название}": {
-      "post": {
+      "get": {
         "tags": ["Products"],
         "summary": "Get specified product",
         "parameters": [
