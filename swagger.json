@@ -18,7 +18,7 @@
       "description": "Authorization endpoints"
     },
     {
-      "name": "Product",
+      "name": "Products",
       "description": "Search specified product endpoint"
     },
     {
@@ -125,9 +125,9 @@
         }
       }
     },
-    "/product?search={название}": {
+    "/products?search={название}": {
       "post": {
-        "tags": ["Product"],
+        "tags": ["Products"],
         "summary": "Get specified product",
         "parameters": [
           {
@@ -141,7 +141,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ProductResponse"
+                  "$ref": "#/components/schemas/ProductsResponse"
                 }
               }
             }
@@ -424,7 +424,7 @@
           }
         }
       },
-      "ProductResponse": {
+      "ProductsResponse": {
         "type": "object",
         "properties": {
           "Product": {
@@ -630,13 +630,8 @@
       },
       "DateRequest": {
         "type": "object",
-        "required": ["userId", "date"],
+        "required": ["date"],
         "properties": {
-          "userId": {
-            "type": "string",
-            "description": "User's id",
-            "example": "60fd86dc70c2653e78ec10de"
-          },
           "date": {
             "type": "string",
             "description": "date",
