@@ -13,8 +13,8 @@ const signUpController = async (req, res) => {
   if (user) {
     return res.status(409).json({ message: 'Login in use' });
   }
-  await signUpService(name, login, password);
-  res.status(201).json({ status: 'success' });
+  const accessToken = await signUpService(name, login, password);
+  res.status(201).json({ status: 'success', accessToken });
 };
 
 const loginController = async (req, res) => {
