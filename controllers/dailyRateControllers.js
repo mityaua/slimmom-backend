@@ -47,21 +47,23 @@ const notAllowedProductsObj = async bloodType => {
   arr = Object.values(arr);
   let notAllowedProductsAll = [...new Set(arr)];
   let notAllowedProducts = [];
-
-  for (let i = 0; i < 5; i++) {
-    notAllowedProducts[i] =
-      notAllowedProductsAll[
-        Math.floor(Math.random() * notAllowedProductsAll.length)
-      ];
+  if (notAllowedProductsAll[0] === undefined) {
+    notAllowedProducts = ['Кушать можно все'];
+  } else {
+    do {
+      let index = Math.floor(Math.random() * notAllowedProductsAll.length);
+      if (notAllowedProducts.includes(notAllowedProductsAll[index])) {
+      } else if (notAllowedProducts.includes('undefined')) {
+        break;
+      } else {
+        notAllowedProducts.push(notAllowedProductsAll[index]);
+      }
+    } while (notAllowedProducts.length !== 5);
   }
-
   if (notAllowedProductsAll.length === 0) {
     notAllowedProductsAll = ['Кушать можно все'];
   }
 
-  if (notAllowedProducts[0] === undefined) {
-    notAllowedProducts = ['Кушать можно все'];
-  }
   const result = { notAllowedProductsAll, notAllowedProducts };
   return result;
 };
