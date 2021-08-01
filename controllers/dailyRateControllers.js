@@ -54,6 +54,7 @@ const notAllowedProductsObj = async bloodType => {
       let index = Math.floor(Math.random() * notAllowedProductsAll.length);
       if (notAllowedProducts.includes(notAllowedProductsAll[index])) {
       } else if (notAllowedProducts.includes('undefined')) {
+        break;
       } else {
         notAllowedProducts.push(notAllowedProductsAll[index]);
       }
