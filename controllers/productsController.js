@@ -3,8 +3,7 @@ const { NotFoundError } = require('../helpers/errors');
 
 const getProduct = async (req, res) => {
   try {
-    const { search } = decodeURI(req.query);
-    console.log(search);
+    const search = decodeURI(req.query.search);
     const product = await Product.getProducts(search);
     return res.status(200).json(product);
   } catch (error) {
