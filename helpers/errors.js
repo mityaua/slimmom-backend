@@ -33,10 +33,18 @@ class NotFoundError extends commonError {
   }
 }
 
+class NoData extends commonError {
+  constructor(message) {
+    super(message);
+    this.status = 304;
+  }
+}
+
 module.exports = {
   commonError,
   ValidationError,
   WrongParametersError,
   NotAuthorizedError,
   NotFoundError,
+  NoData,
 };
