@@ -4,12 +4,14 @@ const {
   infoPerDay,
 } = require('../services/dayService');
 
+const { NoData, WrongParametersError } = require('../helpers/errors');
+
 const addProductPerDayController = async (req, res, next) => {
   try {
     const currentDay = await addProductPerDay(req.body, req.user);
     return res.status(201).json(currentDay);
   } catch (error) {
-    next(error);
+    next(new WrongParametersError('Wrong parameters'));
   }
 };
 
@@ -23,7 +25,7 @@ const deleteProductPerDayController = async (req, res, next) => {
     const eatenProducts = updatedEatenProducts;
     return res.status(201).json({ updatedDayData, eatenProducts });
   } catch (error) {
-    next(error);
+    next(new WrongParametersError('Wrong parameters'));
   }
 };
 
@@ -34,7 +36,7 @@ const infoPerDayController = async (req, res, next) => {
 
     return res.status(200).json(dayInfo);
   } catch (error) {
-    next(error);
+    next(new NoData('No data to display'));
   }
 };
 
